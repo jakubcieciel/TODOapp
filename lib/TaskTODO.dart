@@ -4,8 +4,9 @@ class TaskTODO {
   final String title;
   final String description;
   final String day;
+  final String id;
 
-  TaskTODO({this.title, this.description, this.day});
+  TaskTODO({this.title, this.description, this.day, this.id});
 }
 
 class Task extends StatelessWidget {
@@ -13,7 +14,9 @@ class Task extends StatelessWidget {
   final String description;
   final String day;
   final bool isDayType;
-  Task({this.isDayType = true, this.description, this.title, this.day});
+  final String id;
+  Task(
+      {this.isDayType = true, this.description, this.title, this.day, this.id});
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,7 +26,7 @@ class Task extends StatelessWidget {
             color: Colors.redAccent,
             borderRadius: BorderRadius.all(Radius.circular(10))),
         child: Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: EdgeInsets.only(left: 8.0, top: 4, bottom: 8),
           child: Row(
             children: <Widget>[
               Expanded(
@@ -31,6 +34,11 @@ class Task extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
+                    Icon(
+                      Icons.close,
+                      size: 15,
+                      color: Colors.white,
+                    ),
                     Text(
                       title,
                       style: TextStyle(color: Colors.white, fontSize: 30),
