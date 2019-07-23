@@ -84,9 +84,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ChooseBoxE(
                                     'all',
                                     isActive:
-                                        snapshotCurrentFilter.data == 'all'
-                                            ? true
-                                            : false,
+                                        snapshotCurrentFilter.data == 'all',
                                     onTap: () => _bloc.taskListEventSink
                                         .add(SetFilterAll()),
                                   ),
@@ -94,9 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ChooseBoxE(
                                     'all w/day',
                                     isActive: snapshotCurrentFilter.data ==
-                                            'allwithday'
-                                        ? true
-                                        : false,
+                                        'allwithday',
                                     onTap: () => _bloc.taskListEventSink
                                         .add(SetFilterAllWithDay()),
                                   ),
@@ -104,9 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ChooseBoxE(
                                     'all w/no day',
                                     isActive: snapshotCurrentFilter.data ==
-                                            'allwithnoday'
-                                        ? true
-                                        : false,
+                                        'allwithnoday',
                                     onTap: () => _bloc.taskListEventSink
                                         .add(SetFilterAllWithNoDay()),
                                   )
@@ -118,9 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ChooseBoxE(
                                     'Mon',
                                     isActive:
-                                        snapshotCurrentFilter.data == 'mon'
-                                            ? true
-                                            : false,
+                                        snapshotCurrentFilter.data == 'mon',
                                     onTap: () => _bloc.taskListEventSink
                                         .add(SetFilterMon()),
                                   ),
@@ -128,9 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ChooseBoxE(
                                     'Tue',
                                     isActive:
-                                        snapshotCurrentFilter.data == 'tue'
-                                            ? true
-                                            : false,
+                                        snapshotCurrentFilter.data == 'tue',
                                     onTap: () => _bloc.taskListEventSink
                                         .add(SetFilterTue()),
                                   ),
@@ -138,9 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ChooseBoxE(
                                     'Wed',
                                     isActive:
-                                        snapshotCurrentFilter.data == 'wed'
-                                            ? true
-                                            : false,
+                                        snapshotCurrentFilter.data == 'wed',
                                     onTap: () => _bloc.taskListEventSink
                                         .add(SetFilterWed()),
                                   ),
@@ -148,9 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ChooseBoxE(
                                     'Thu',
                                     isActive:
-                                        snapshotCurrentFilter.data == 'thu'
-                                            ? true
-                                            : false,
+                                        snapshotCurrentFilter.data == 'thu',
                                     onTap: () => _bloc.taskListEventSink
                                         .add(SetFilterThu()),
                                   ),
@@ -158,9 +144,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ChooseBoxE(
                                     'Fri',
                                     isActive:
-                                        snapshotCurrentFilter.data == 'fri'
-                                            ? true
-                                            : false,
+                                        snapshotCurrentFilter.data == 'fri',
                                     onTap: () => _bloc.taskListEventSink
                                         .add(SetFilterFri()),
                                   ),
@@ -168,9 +152,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ChooseBoxE(
                                     'Sat',
                                     isActive:
-                                        snapshotCurrentFilter.data == 'sat'
-                                            ? true
-                                            : false,
+                                        snapshotCurrentFilter.data == 'sat',
                                     onTap: () => _bloc.taskListEventSink
                                         .add(SetFilterSat()),
                                   ),
@@ -178,9 +160,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                   ChooseBoxE(
                                     'Sun',
                                     isActive:
-                                        snapshotCurrentFilter.data == 'sun'
-                                            ? true
-                                            : false,
+                                        snapshotCurrentFilter.data == 'sun',
                                     onTap: () => _bloc.taskListEventSink
                                         .add(SetFilterSun()),
                                   ),
