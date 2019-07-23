@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "851188983996",
+    "firebase_url": "https://todoapp-675ba.firebaseio.com",
+    "project_id": "todoapp-675ba",
+    "storage_bucket": "todoapp-675ba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851188983996:android:39224e968a332e17",
+        "android_client_info": {
+          "package_name": "jakubcieciel.todo_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "851188983996-fnm0k1unp33a5gqujlcqmm8haenca9hg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCu26Xt1sAEnN9GoabLz09Ex9CVMu5fEsw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "851188983996-fnm0k1unp33a5gqujlcqmm8haenca9hg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
