@@ -36,18 +36,6 @@ class _MyHomePageState extends State<MyHomePage> {
   final _bloc = TaskListBloc();
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  Future<List<TaskTODO>> getTask() async {
-    final tasks = await _firestore.collection('tasks').getDocuments();
-    List<TaskTODO> taskList = [];
-    for (var task in tasks.documents) {}
-    return taskList;
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,

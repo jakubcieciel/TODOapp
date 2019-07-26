@@ -34,7 +34,7 @@ class ChooseBox extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(3)),
           color: isActive ? Colors.red : Colors.red[300],
-          border: Border.all(width: 3, color: Colors.red[400]),
+          border: Border.all(width: 3, color: Colors.red),
         ),
         height: height,
         child: Text(
