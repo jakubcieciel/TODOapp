@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'task_add_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:todo_app/ChooseBox.dart';
+import 'package:todo_app/Widgets/ChooseBox.dart';
 import 'package:todo_app/Task_list_bloc/task_list_bloc.dart';
 import 'package:todo_app/Task_list_bloc/task_list_event.dart';
-import 'package:todo_app/TaskTODO.dart';
+import 'package:todo_app/Widgets/Task.dart';
 
 void main() => runApp(MyApp());
 
