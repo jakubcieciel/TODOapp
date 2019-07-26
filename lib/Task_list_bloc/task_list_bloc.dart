@@ -21,13 +21,13 @@ class TaskListBloc {
   }
 
   void _mapEventToState(TaskListEvent event) {
-    if (event is EnableFilters) {
+    if (event is EnableFiltersEvent) {
       if (event is EnableFiltersF) _enableFilters = false;
 
       if (event is EnableFiltersT) _enableFilters = true;
       _inEnableFilters.add(_enableFilters);
     }
-    if (event is SetFilter) {
+    if (event is SetFilterEvent) {
       if (event is SetFilterAll) _currentFilter = 'all';
       if (event is SetFilterAllWithDay) _currentFilter = 'allwithday';
       if (event is SetFilterAllWithNoDay) _currentFilter = 'allwithnoday';
