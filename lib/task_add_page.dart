@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/Widgets/InputBox.dart';
-import 'package:todo_app/Task_add_bloc/task_add_bloc.dart';
-import 'Task_add_bloc/task_add_event.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:todo_app/Task_add_bloc/task_add.dart';
+import 'Firebase_repository.dart';
+import 'models/models.dart';
+import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class TaskAddPage extends StatefulWidget {
   @override
@@ -10,37 +12,52 @@ class TaskAddPage extends StatefulWidget {
 }
 
 class _TaskAddPageState extends State<TaskAddPage> {
-  final _bloc = TaskAddBloc();
-  final _firestore = Firestore.instance;
-  String chosenDay = 'Monday';
-  String title;
-  String description;
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-      stream: _bloc.enableDaySelection,
-      initialData: false,
-      builder: (BuildContext context, AsyncSnapshot<bool> snapshotDSenabled) {
-        return Scaffold(
-          body: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
-              InputBox(
-                text: 'Title',
-                onChanged: (textOutput) {
-                  title = textOutput;
-                },
-              ),
-              InputBox(
-                text: 'Description',
-                onChanged: (textOutput) {
-                  description = textOutput;
-                },
-              ),
-              InputBox(
-                onClick: snapshotDSenabled.data
-                    ? () => _bloc.taskAddEventSink.add(DisplayDaySelectionF())
-                    : () => _bloc.taskAddEventSink.add(DisplayDaySelectionT()),
+    return BlocProvider<TaskAddBloc>(
+      builder: (context) => TaskAddBloc(),
+      child: AddTaskPage(),
+    );
+  }
+}
+
+class AddTaskPage extends StatefulWidget {
+  @override
+  _AddTaskPageState createState() => _AddTaskPageState();
+}
+
+class _AddTaskPageState extends State<AddTaskPage> {
+  String chosenDay = 'Monday';
+
+  String title;
+
+  String description;
+
+  @override
+  Widget build(BuildContext context) {
+    final taskAddBloc = BlocProvider.of<TaskAddBloc>(context);
+    return Scaffold(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+          InputBox(
+            text: 'Title',
+            onChanged: (textOutput) {
+              title = textOutput;
+            },
+          ),
+          InputBox(
+            text: 'Description',
+            onChanged: (textOutput) {
+              description = textOutput;
+            },
+          ),
+          BlocBuilder<TaskAddBloc, TaskAddState>(
+            builder: (context, state) {
+              return InputBox(
+                onClick: state == DaySelectionEnabled()
+                    ? () => taskAddBloc.dispatch(DisableDaySelection())
+                    : () => taskAddBloc.dispatch(EnableDaySelection()),
                 text: '',
                 isTextbox: false,
                 childIfNotTextBox: Padding(
@@ -48,7 +65,7 @@ class _TaskAddPageState extends State<TaskAddPage> {
                   child: Row(
                     children: <Widget>[
                       Icon(
-                        snapshotDSenabled.data
+                        state == DaySelectionEnabled()
                             ? Icons.gps_fixed
                             : Icons.gps_not_fixed,
                         color: Colors.white,
@@ -63,11 +80,15 @@ class _TaskAddPageState extends State<TaskAddPage> {
                     ],
                   ),
                 ),
-              ),
-              InputBox(
+              );
+            },
+          ),
+          BlocBuilder<TaskAddBloc, TaskAddState>(
+            builder: (context, state) {
+              return InputBox(
                 text: 'Choose day',
                 isTextField: false,
-                isVisible: snapshotDSenabled.data,
+                isVisible: state == DaySelectionEnabled(),
                 childIfNotTextField: DropdownButton<String>(
                   icon: Icon(
                     Icons.arrow_drop_down,
@@ -97,27 +118,21 @@ class _TaskAddPageState extends State<TaskAddPage> {
                     });
                   },
                 ),
-              )
-            ],
+              );
+            },
           ),
-          floatingActionButton: GestureDetector(
-            onTap: snapshotDSenabled.data
-                ? () {
-                    _firestore.collection('tasks').add({
-                      'title': title,
-                      'description': description,
-                      'day': chosenDay,
-                    });
-                    Navigator.pop(context);
-                  }
-                : () {
-                    _firestore.collection('tasks').add({
-                      'title': title,
-                      'description': description,
-                      'day': null,
-                    });
-                    Navigator.pop(context);
-                  },
+        ],
+      ),
+      floatingActionButton: BlocBuilder<TaskAddBloc, TaskAddState>(
+        builder: (context, state) {
+          return GestureDetector(
+            onTap: () {
+              FirebaseRepository.addTask(TaskTODO(
+                  title: title,
+                  description: description,
+                  day: state == DaySelectionEnabled() ? chosenDay : null));
+              Navigator.pop(context);
+            },
             child: Container(
               height: 100,
               width: 100,
@@ -139,19 +154,13 @@ class _TaskAddPageState extends State<TaskAddPage> {
                 ),
               ),
             ),
-          ),
-          backgroundColor: Colors.white,
-          appBar: AppBar(
-            title: Text('Add new Task'),
-          ),
-        );
-      },
+          );
+        },
+      ),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text('Add new Task'),
+      ),
     );
-  }
-
-  @override
-  void dispose() {
-    _bloc.dispose();
-    super.dispose();
   }
 }
